@@ -1,0 +1,41 @@
+# Build results
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vspscc
+*.vssscc
+*.cache
+*.dbmdl
+*.bak
+*.log
+*.vsconfig
+
+# Visual Studio
+.vs/
+*.VC.db
+*.VC.opendb
+*.vscode/
+*.sqlite
+
+# Rider
+.idea/
+
+# Others
+*.swp
+*.tmp
+*.DS_Store
+Thumbs.db
+*.wsuo
+
+# Backup files
+*~
+*.bak
+
+# Build folders
+Debug/
+Release/

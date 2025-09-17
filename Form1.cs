@@ -21,7 +21,66 @@ namespace ExcelFiller
                     dateTimePickerPonovnaTest.CustomFormat = " ";
                 }
             };
+            buttonPretrazi.Click += buttonPretrazi_Click;
         }
+    private void buttonPretrazi_Click(object? sender, EventArgs? e)
+        {
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            // Pretraga poslednje verzije za izabrani modul (bez izbora datuma)
+            string izabraniModul = comboBoxPretragaModul.SelectedItem?.ToString() ?? "";
+            if (string.IsNullOrWhiteSpace(izabraniModul))
+            {
+                labelRezultat.Text = "Izaberite modul ili podmodul!";
+                return;
+            }
+            string excelNazivModula = izabraniModul;
+            if (izabraniModul.StartsWith("  - "))
+            {
+                excelNazivModula = "iBank (inHouse, web) - " + izabraniModul.Trim().Substring(3);
+            }
+            string excelPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Izvestaj.xlsx");
+            if (!System.IO.File.Exists(excelPath))
+            {
+                labelRezultat.Text = "Excel fajl nije pronađen na Desktopu!";
+                return;
+            }
+            try
+            {
+                using (var package = new OfficeOpenXml.ExcelPackage(new System.IO.FileInfo(excelPath)))
+                {
+                    var ws = package.Workbook.Worksheets[0];
+                    int rowCount = ws.Dimension?.End.Row ?? 1;
+                    DateTime? poslednjiDatum = null;
+                    string poslednjaVerzija = "Nema podataka za izabrani modul.";
+                    for (int i = 2; i <= rowCount; i++)
+                    {
+                        string modulCell = ws.Cells[i, 2].Text.Trim();
+                        string idVerzijaCell = ws.Cells[i, 3].Text.Trim();
+                        string datumTestCell = ws.Cells[i, 9].Text.Trim();
+                        string datumPonTestCell = ws.Cells[i, 10].Text.Trim();
+                        DateTime datumTest, datumPonTest;
+                        DateTime? maxDatum = null;
+                        if (modulCell == excelNazivModula)
+                        {
+                            if (DateTime.TryParseExact(datumTestCell, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out datumTest))
+                                maxDatum = datumTest;
+                            if (DateTime.TryParseExact(datumPonTestCell, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out datumPonTest))
+                                if (!maxDatum.HasValue || datumPonTest > maxDatum) maxDatum = datumPonTest;
+                            if (maxDatum.HasValue && (!poslednjiDatum.HasValue || maxDatum > poslednjiDatum))
+                            {
+                                poslednjiDatum = maxDatum;
+                                poslednjaVerzija = $"Poslednja verzija za {izabraniModul} je: {idVerzijaCell} (datum: {maxDatum:dd.MM.yyyy})";
+                            }
+                        }
+                    }
+                    labelRezultat.Text = poslednjaVerzija;
+                }
+            }
+            catch (Exception ex)
+            {
+                labelRezultat.Text = $"Greška pri pretrazi: {ex.Message}";
+            }
+    }
 
         private void buttonDodaj_Click(object sender, EventArgs e)
         {
@@ -30,7 +89,7 @@ namespace ExcelFiller
                 string.IsNullOrWhiteSpace(textBoxIDVerzija.Text) ||
                 string.IsNullOrWhiteSpace(textBoxAsseco.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNLBKB.Text) ||
-                string.IsNullOrWhiteSpace(textBoxOdgovornoLice.Text))
+                comboBoxOdgovornoLice.SelectedIndex == -1)
             {
                 MessageBox.Show("Popunite sva obavezna polja označena zvezdicom (*)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -48,10 +107,10 @@ namespace ExcelFiller
             string rdm = textBoxRDM.Text.Trim();
             string redosled = textBoxRedosled.Text.Trim();
             string napomena = textBoxNapomena.Text.Trim();
-            string odgovornoLice = textBoxOdgovornoLice.Text.Trim();
+            string odgovornoLice = comboBoxOdgovornoLice.SelectedItem?.ToString() ?? "";
             string datumPrijem = dateTimePickerPrijem.Value.ToString("dd.MM.yyyy");
             string datumTest = dateTimePickerTest.Value.ToString("dd.MM.yyyy");
-            string datumPonovnaTest = dateTimePickerPonovnaTest.Checked ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
+            string datumPonovnaTest = dateTimePickerPonovnaTest.CustomFormat != " " ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
 
             // Upis u Excel fajl koristeći EPPlus
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

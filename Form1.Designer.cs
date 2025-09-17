@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            tabControl = new TabControl();
+            tabPageUnos = new TabPage();
             comboBoxModul = new ComboBox();
             textBoxIDVerzija = new TextBox();
             textBoxAsseco = new TextBox();
@@ -37,7 +39,7 @@
             dateTimePickerPonovnaTest = new DateTimePicker();
             textBoxRDM = new TextBox();
             textBoxRedosled = new TextBox();
-            textBoxOdgovornoLice = new TextBox();
+            comboBoxOdgovornoLice = new ComboBox();
             textBoxNapomena = new TextBox();
             buttonDodaj = new Button();
             labelModul = new Label();
@@ -51,56 +53,62 @@
             labelRedosled = new Label();
             labelOdgovornoLice = new Label();
             labelNapomena = new Label();
+            tabPagePretraga = new TabPage();
+            comboBoxPretragaModul = new ComboBox();
+            buttonPretrazi = new Button();
+            labelRezultat = new Label();
+            tabControl.SuspendLayout();
+            tabPageUnos.SuspendLayout();
+            tabPagePretraga.SuspendLayout();
             SuspendLayout();
+            // 
+            // tabControl
+            // 
+            tabControl.Controls.Add(tabPageUnos);
+            tabControl.Controls.Add(tabPagePretraga);
+            tabControl.Location = new Point(0, 0);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(588, 574);
+            tabControl.TabIndex = 100;
+            // 
+            // tabPageUnos
+            // 
+            tabPageUnos.Controls.Add(comboBoxModul);
+            tabPageUnos.Controls.Add(textBoxIDVerzija);
+            tabPageUnos.Controls.Add(textBoxAsseco);
+            tabPageUnos.Controls.Add(textBoxNLBKB);
+            tabPageUnos.Controls.Add(dateTimePickerPrijem);
+            tabPageUnos.Controls.Add(dateTimePickerTest);
+            tabPageUnos.Controls.Add(dateTimePickerPonovnaTest);
+            tabPageUnos.Controls.Add(textBoxRDM);
+            tabPageUnos.Controls.Add(textBoxRedosled);
+            tabPageUnos.Controls.Add(comboBoxOdgovornoLice);
+            tabPageUnos.Controls.Add(textBoxNapomena);
+            tabPageUnos.Controls.Add(buttonDodaj);
+            tabPageUnos.Controls.Add(labelModul);
+            tabPageUnos.Controls.Add(labelIDVerzija);
+            tabPageUnos.Controls.Add(labelAsseco);
+            tabPageUnos.Controls.Add(labelNLBKB);
+            tabPageUnos.Controls.Add(labelPrijem);
+            tabPageUnos.Controls.Add(labelTest);
+            tabPageUnos.Controls.Add(labelPonovnaTest);
+            tabPageUnos.Controls.Add(labelRDM);
+            tabPageUnos.Controls.Add(labelRedosled);
+            tabPageUnos.Controls.Add(labelOdgovornoLice);
+            tabPageUnos.Controls.Add(labelNapomena);
+            tabPageUnos.Location = new Point(4, 34);
+            tabPageUnos.Name = "tabPageUnos";
+            tabPageUnos.Size = new Size(580, 516);
+            tabPageUnos.TabIndex = 0;
+            tabPageUnos.Text = "Unos";
+            tabPageUnos.UseVisualStyleBackColor = true;
             // 
             // comboBoxModul
             // 
             comboBoxModul.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxModul.FormattingEnabled = true;
-            comboBoxModul.Items.AddRange(new object[] {
-                "Glavna Knjiga",
-                "Kreditno depozitni poslovi, uključujući i Faktoring",
-                "Devizno poslovanje, uključujući FGW",
-                "Poslovanje sa stanovništvom, trezor",
-                "Domaći platni promet",
-                "Kartično poslovanje",
-                "Product Delivery",
-                "iBank (inHouse, web)",
-                "  - iBank - DB isporuke",
-                "  - AdapterPlugInCMS",
-                "  - AdapterPlugInRT",
-                "  - CMSAdapter",
-                "  - DEAuthenticRs",
-                "  - DEWebAdminP",
-                "  - DEWebApiP",
-                "  - DEWebRemote",
-                "  - DigitalBranchAPI",
-                "  - EmailService",
-                "  - FPSAdapter",
-                "  - FxWeb2012Kombank",
-                "  - HalcomNotifProxy",
-                "  - KCIntegrationSvc",
-                "  - PaymAdapt",
-                "  - RemoteSigningManSrv",
-                "  - SysIntAPI",
-                "  - SysIntegrationAPI",
-                "  - SysIntLib",
-                "  - SysIntLib-KoBBg",
-                "  - SysIntLibV2KBBG",
-                "  - SysIntServiceKBBGse",
-                "  - SysMngrKBBG-iBank",
-                "  - SysMngrWSKBBG-iBank",
-                "  - SysMngrWS-KOBBg",
-                "  - SysMngrWSProxyKBBG",
-                "  - SystemManagerWS",
-                "  - SystemManagerWSProxy",
-                "  - TanGeneratorKOBBG",
-                "Critesys",
-                "IPS-PGW",
-                "Online Faktoring (SC4F)",
-                "BC API",
-                "Calculation servisi"
-            });
+            comboBoxModul.Items.AddRange(new object[] { "Glavna Knjiga", "Kreditno depozitni poslovi, uključujući i Faktoring", "Devizno poslovanje, uključujući FGW", "Poslovanje sa stanovništvom, trezor", "Domaći platni promet", "Kartično poslovanje", "Product Delivery", "iBank (inHouse, web)", "  - iBank - DB isporuke", "  - AdapterPlugInCMS", "  - AdapterPlugInRT", "  - CMSAdapter", "  - DEAuthenticRs", "  - DEWebAdminP", "  - DEWebApiP", "  - DEWebRemote", "  - DigitalBranchAPI", "  - EmailService", "  - FPSAdapter", "  - FxWeb2012Kombank", "  - HalcomNotifProxy", "  - KCIntegrationSvc", "  - PaymAdapt", "  - RemoteSigningManSrv", "  - SysIntAPI", "  - SysIntegrationAPI", "  - SysIntLib", "  - SysIntLib-KoBBg", "  - SysIntLibV2KBBG", "  - SysIntServiceKBBGse", "  - SysMngrKBBG-iBank", "  - SysMngrWSKBBG-iBank", "  - SysMngrWS-KOBBg", "  - SysMngrWSProxyKBBG", "  - SystemManagerWS", "  - SystemManagerWSProxy", "  - TanGeneratorKOBBG", "Critesys", "IPS-PGW", "Online Faktoring (SC4F)", "BC API", "Calculation servisi" });
             comboBoxModul.Location = new Point(300, 25);
             comboBoxModul.Name = "comboBoxModul";
             comboBoxModul.Size = new Size(250, 33);
@@ -129,8 +137,8 @@
             // 
             // dateTimePickerPrijem
             // 
-            dateTimePickerPrijem.Format = DateTimePickerFormat.Custom;
             dateTimePickerPrijem.CustomFormat = "dd.MM.yyyy";
+            dateTimePickerPrijem.Format = DateTimePickerFormat.Custom;
             dateTimePickerPrijem.Location = new Point(300, 185);
             dateTimePickerPrijem.Name = "dateTimePickerPrijem";
             dateTimePickerPrijem.Size = new Size(250, 31);
@@ -138,8 +146,8 @@
             // 
             // dateTimePickerTest
             // 
-            dateTimePickerTest.Format = DateTimePickerFormat.Custom;
             dateTimePickerTest.CustomFormat = "dd.MM.yyyy";
+            dateTimePickerTest.Format = DateTimePickerFormat.Custom;
             dateTimePickerTest.Location = new Point(300, 225);
             dateTimePickerTest.Name = "dateTimePickerTest";
             dateTimePickerTest.Size = new Size(250, 31);
@@ -147,8 +155,8 @@
             // 
             // dateTimePickerPonovnaTest
             // 
+            dateTimePickerPonovnaTest.CustomFormat = " ";
             dateTimePickerPonovnaTest.Format = DateTimePickerFormat.Custom;
-            dateTimePickerPonovnaTest.CustomFormat = " "; // prazno po defaultu
             dateTimePickerPonovnaTest.Location = new Point(300, 265);
             dateTimePickerPonovnaTest.Name = "dateTimePickerPonovnaTest";
             dateTimePickerPonovnaTest.Size = new Size(250, 31);
@@ -168,12 +176,15 @@
             textBoxRedosled.Size = new Size(250, 31);
             textBoxRedosled.TabIndex = 8;
             // 
-            // textBoxOdgovornoLice
+            // comboBoxOdgovornoLice
             // 
-            textBoxOdgovornoLice.Location = new Point(300, 385);
-            textBoxOdgovornoLice.Name = "textBoxOdgovornoLice";
-            textBoxOdgovornoLice.Size = new Size(250, 31);
-            textBoxOdgovornoLice.TabIndex = 9;
+            comboBoxOdgovornoLice.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxOdgovornoLice.FormattingEnabled = true;
+            comboBoxOdgovornoLice.Items.AddRange(new object[] { "Nemanja Milovanovic", "Milica Madic", "Luka Stanojcic", "Nenad Jurisin" });
+            comboBoxOdgovornoLice.Location = new Point(300, 385);
+            comboBoxOdgovornoLice.Name = "comboBoxOdgovornoLice";
+            comboBoxOdgovornoLice.Size = new Size(250, 33);
+            comboBoxOdgovornoLice.TabIndex = 9;
             // 
             // textBoxNapomena
             // 
@@ -258,7 +269,7 @@
             labelPonovnaTest.Font = new Font("Segoe UI", 9F);
             labelPonovnaTest.Location = new Point(30, 270);
             labelPonovnaTest.Name = "labelPonovnaTest";
-            labelPonovnaTest.Size = new Size(182, 25);
+            labelPonovnaTest.Size = new Size(240, 25);
             labelPonovnaTest.TabIndex = 18;
             labelPonovnaTest.Text = "Datum pon. testne instalacije";
             // 
@@ -278,7 +289,7 @@
             labelRedosled.Font = new Font("Segoe UI", 9F);
             labelRedosled.Location = new Point(30, 350);
             labelRedosled.Name = "labelRedosled";
-            labelRedosled.Size = new Size(118, 25);
+            labelRedosled.Size = new Size(157, 25);
             labelRedosled.TabIndex = 20;
             labelRedosled.Text = "Redosled puštanja";
             // 
@@ -288,7 +299,7 @@
             labelOdgovornoLice.Font = new Font("Segoe UI", 9F);
             labelOdgovornoLice.Location = new Point(30, 390);
             labelOdgovornoLice.Name = "labelOdgovornoLice";
-            labelOdgovornoLice.Size = new Size(72, 25);
+            labelOdgovornoLice.Size = new Size(168, 25);
             labelOdgovornoLice.TabIndex = 21;
             labelOdgovornoLice.Text = "BA odgovorno lice*";
             // 
@@ -302,42 +313,71 @@
             labelNapomena.TabIndex = 22;
             labelNapomena.Text = "Napomena";
             // 
+            // tabPagePretraga
+            // 
+            tabPagePretraga.Controls.Add(comboBoxPretragaModul);
+            tabPagePretraga.Controls.Add(buttonPretrazi);
+            tabPagePretraga.Controls.Add(labelRezultat);
+            tabPagePretraga.Location = new Point(4, 34);
+            tabPagePretraga.Name = "tabPagePretraga";
+            tabPagePretraga.Size = new Size(580, 536);
+            tabPagePretraga.TabIndex = 1;
+            tabPagePretraga.Text = "Pretraga";
+            tabPagePretraga.UseVisualStyleBackColor = true;
+            // 
+            // comboBoxPretragaModul
+            // 
+            comboBoxPretragaModul.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPretragaModul.FormattingEnabled = true;
+            comboBoxPretragaModul.Items.AddRange(new object[] { "Glavna Knjiga", "Kreditno depozitni poslovi, uključujući i Faktoring", "Devizno poslovanje, uključujući FGW", "Poslovanje sa stanovništvom, trezor", "Domaći platni promet", "Kartično poslovanje", "Product Delivery", "iBank (inHouse, web)", "  - iBank - DB isporuke", "  - AdapterPlugInCMS", "  - AdapterPlugInRT", "  - CMSAdapter", "  - DEAuthenticRs", "  - DEWebAdminP", "  - DEWebApiP", "  - DEWebRemote", "  - DigitalBranchAPI", "  - EmailService", "  - FPSAdapter", "  - FxWeb2012Kombank", "  - HalcomNotifProxy", "  - KCIntegrationSvc", "  - PaymAdapt", "  - RemoteSigningManSrv", "  - SysIntAPI", "  - SysIntegrationAPI", "  - SysIntLib", "  - SysIntLib-KoBBg", "  - SysIntLibV2KBBG", "  - SysIntServiceKBBGse", "  - SysMngrKBBG-iBank", "  - SysMngrWSKBBG-iBank", "  - SysMngrWS-KOBBg", "  - SysMngrWSProxyKBBG", "  - SystemManagerWS", "  - SystemManagerWSProxy", "  - TanGeneratorKOBBG", "Critesys", "IPS-PGW", "Online Faktoring (SC4F)", "BC API", "Calculation servisi" });
+            comboBoxPretragaModul.Location = new Point(40, 40);
+            comboBoxPretragaModul.Name = "comboBoxPretragaModul";
+            comboBoxPretragaModul.Size = new Size(300, 33);
+            comboBoxPretragaModul.TabIndex = 0;
+            // 
+            // buttonPretrazi
+            // 
+            buttonPretrazi.Location = new Point(260, 90);
+            buttonPretrazi.Name = "buttonPretrazi";
+            buttonPretrazi.Size = new Size(80, 31);
+            buttonPretrazi.TabIndex = 2;
+            buttonPretrazi.Text = "Pretraži";
+            buttonPretrazi.UseVisualStyleBackColor = true;
+            // 
+            // labelRezultat
+            // 
+            labelRezultat.Location = new Point(40, 140);
+            labelRezultat.Name = "labelRezultat";
+            labelRezultat.Size = new Size(450, 60);
+            labelRezultat.TabIndex = 3;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(588, 554);
-            Controls.Add(comboBoxModul);
-            Controls.Add(textBoxIDVerzija);
-            Controls.Add(textBoxAsseco);
-            Controls.Add(textBoxNLBKB);
-            Controls.Add(dateTimePickerPrijem);
-            Controls.Add(dateTimePickerTest);
-            Controls.Add(dateTimePickerPonovnaTest);
-            Controls.Add(textBoxRDM);
-            Controls.Add(textBoxRedosled);
-            Controls.Add(textBoxOdgovornoLice);
-            Controls.Add(textBoxNapomena);
-            Controls.Add(buttonDodaj);
-            Controls.Add(labelModul);
-            Controls.Add(labelIDVerzija);
-            Controls.Add(labelAsseco);
-            Controls.Add(labelNLBKB);
-            Controls.Add(labelPrijem);
-            Controls.Add(labelTest);
-            Controls.Add(labelPonovnaTest);
-            Controls.Add(labelRDM);
-            Controls.Add(labelRedosled);
-            Controls.Add(labelOdgovornoLice);
-            Controls.Add(labelNapomena);
+            ClientSize = new Size(588, 574);
+            Controls.Add(tabControl);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
+            MaximizeBox = false;
             Name = "Form1";
             Text = "Excel Filler";
+            tabControl.ResumeLayout(false);
+            tabPageUnos.ResumeLayout(false);
+            tabPageUnos.PerformLayout();
+            tabPagePretraga.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPageUnos;
+        private System.Windows.Forms.TabPage tabPagePretraga;
         private System.Windows.Forms.ComboBox comboBoxModul;
+        private System.Windows.Forms.ComboBox comboBoxPretragaModul;
+        private System.Windows.Forms.Button buttonPretrazi;
+        private System.Windows.Forms.Label labelRezultat;
         private System.Windows.Forms.TextBox textBoxIDVerzija;
         private System.Windows.Forms.TextBox textBoxAsseco;
         private System.Windows.Forms.TextBox textBoxNLBKB;
@@ -346,7 +386,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePickerPonovnaTest;
         private System.Windows.Forms.TextBox textBoxRDM;
         private System.Windows.Forms.TextBox textBoxRedosled;
-        private System.Windows.Forms.TextBox textBoxOdgovornoLice;
+        private System.Windows.Forms.ComboBox comboBoxOdgovornoLice;
         private System.Windows.Forms.TextBox textBoxNapomena;
         private System.Windows.Forms.Button buttonDodaj;
         private System.Windows.Forms.Label labelModul;
