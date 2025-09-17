@@ -99,7 +99,7 @@
             tabPageUnos.Controls.Add(labelNapomena);
             tabPageUnos.Location = new Point(4, 34);
             tabPageUnos.Name = "tabPageUnos";
-            tabPageUnos.Size = new Size(580, 516);
+            tabPageUnos.Size = new Size(580, 536);
             tabPageUnos.TabIndex = 0;
             tabPageUnos.Text = "Unos";
             tabPageUnos.UseVisualStyleBackColor = true;
@@ -207,6 +207,7 @@
             // 
             labelModul.AutoSize = true;
             labelModul.Font = new Font("Segoe UI", 9F);
+            labelModul.ForeColor = Color.Red;
             labelModul.Location = new Point(30, 30);
             labelModul.Name = "labelModul";
             labelModul.Size = new Size(72, 25);
@@ -217,6 +218,7 @@
             // 
             labelIDVerzija.AutoSize = true;
             labelIDVerzija.Font = new Font("Segoe UI", 9F);
+            labelIDVerzija.ForeColor = Color.Red;
             labelIDVerzija.Location = new Point(30, 70);
             labelIDVerzija.Name = "labelIDVerzija";
             labelIDVerzija.Size = new Size(92, 25);
@@ -227,6 +229,7 @@
             // 
             labelAsseco.AutoSize = true;
             labelAsseco.Font = new Font("Segoe UI", 9F);
+            labelAsseco.ForeColor = Color.Red;
             labelAsseco.Location = new Point(30, 110);
             labelAsseco.Name = "labelAsseco";
             labelAsseco.Size = new Size(166, 25);
@@ -237,6 +240,7 @@
             // 
             labelNLBKB.AutoSize = true;
             labelNLBKB.Font = new Font("Segoe UI", 9F);
+            labelNLBKB.ForeColor = Color.Red;
             labelNLBKB.Location = new Point(30, 150);
             labelNLBKB.Name = "labelNLBKB";
             labelNLBKB.Size = new Size(161, 25);
@@ -247,6 +251,7 @@
             // 
             labelPrijem.AutoSize = true;
             labelPrijem.Font = new Font("Segoe UI", 9F);
+            labelPrijem.ForeColor = Color.Red;
             labelPrijem.Location = new Point(30, 190);
             labelPrijem.Name = "labelPrijem";
             labelPrijem.Size = new Size(138, 25);
@@ -257,6 +262,7 @@
             // 
             labelTest.AutoSize = true;
             labelTest.Font = new Font("Segoe UI", 9F);
+            labelTest.ForeColor = Color.Red;
             labelTest.Location = new Point(30, 230);
             labelTest.Name = "labelTest";
             labelTest.Size = new Size(150, 25);
@@ -297,6 +303,7 @@
             // 
             labelOdgovornoLice.AutoSize = true;
             labelOdgovornoLice.Font = new Font("Segoe UI", 9F);
+            labelOdgovornoLice.ForeColor = Color.Red;
             labelOdgovornoLice.Location = new Point(30, 390);
             labelOdgovornoLice.Name = "labelOdgovornoLice";
             labelOdgovornoLice.Size = new Size(168, 25);
@@ -337,9 +344,9 @@
             // 
             // buttonPretrazi
             // 
-            buttonPretrazi.Location = new Point(260, 90);
+            buttonPretrazi.Location = new Point(200, 107);
             buttonPretrazi.Name = "buttonPretrazi";
-            buttonPretrazi.Size = new Size(80, 31);
+            buttonPretrazi.Size = new Size(140, 40);
             buttonPretrazi.TabIndex = 2;
             buttonPretrazi.Text = "Pretraži";
             buttonPretrazi.UseVisualStyleBackColor = true;
