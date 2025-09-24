@@ -1,3 +1,21 @@
+
+# Additional ignores (Visual Studio / .NET)
+.vscode/
+packages/
+publish/
+artifacts/
+TestResult*/
+*.trx
+*.coverage
+*.coveragexml
+*.rsuser
+*.nupkg
+*.snupkg
+*.opendb
+*.VC.db
+*.VC.opendb
+_ReSharper*/
+*.DotSettings.user
 # Build results
 bin/
 obj/
