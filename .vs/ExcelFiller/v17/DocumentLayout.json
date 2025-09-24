@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\nemanja.milovanovic\\source\\repos\\ExcelFiller\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|c:\\users\\nemanja.milovanovic\\source\\repos\\excelfiller\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|c:\\users\\nemanja.milovanovic\\source\\repos\\excelfiller\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|c:\\users\\nemanja.milovanovic\\source\\repos\\excelfiller\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|c:\\users\\nemanja.milovanovic\\source\\repos\\excelfiller\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|c:\\users\\nemanja.milovanovic\\source\\repos\\excelfiller\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{B53045F7-608F-49A1-BF30-7E94D57D7167}|ExcelFiller.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 35,
+          "SelectedChildIndex": 37,
           "Children": [
             {
               "$type": "Bookmark",
@@ -166,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\nemanja.milovanovic\\source\\repos\\ExcelFiller\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -191,7 +191,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "Form1.cs",
               "DocumentMoniker": "C:\\Users\\nemanja.milovanovic\\source\\repos\\ExcelFiller\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
