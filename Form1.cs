@@ -3,6 +3,8 @@ namespace ExcelFiller
 {
     public partial class Form1 : Form
     {
+        // Putanja do deljene Excel datoteke na mrežnoj lokaciji
+        private readonly string excelSharedPath = @"\\bss-testcomp01\PrimenaNLB\Izvestaj.xlsx";
         public Form1()
         {
             InitializeComponent();
@@ -38,10 +40,11 @@ namespace ExcelFiller
             {
                 excelNazivModula = "iBank (inHouse, web) - " + izabraniModul.Trim().Substring(3);
             }
-            string excelPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Izvestaj.xlsx");
+            // Čitanje iz deljene mrežne lokacije
+            string excelPath = excelSharedPath;
             if (!System.IO.File.Exists(excelPath))
             {
-                labelRezultat.Text = "Excel fajl nije pronađen na Desktopu!";
+                labelRezultat.Text = "Excel fajl nije pronađen na deljenoj lokaciji!";
                 return;
             }
             try
@@ -56,8 +59,9 @@ namespace ExcelFiller
                     {
                         string modulCell = ws.Cells[i, 2].Text.Trim();
                         string idVerzijaCell = ws.Cells[i, 3].Text.Trim();
-                        string datumTestCell = ws.Cells[i, 9].Text.Trim();
-                        string datumPonTestCell = ws.Cells[i, 10].Text.Trim();
+                        // Datumi su pomereni na kolone K (11) i L (12)
+                        string datumTestCell = ws.Cells[i, 11].Text.Trim();
+                        string datumPonTestCell = ws.Cells[i, 12].Text.Trim();
                         DateTime datumTest, datumPonTest;
                         DateTime? maxDatum = null;
                         if (modulCell == excelNazivModula)
@@ -89,6 +93,8 @@ namespace ExcelFiller
                 string.IsNullOrWhiteSpace(textBoxIDVerzija.Text) ||
                 string.IsNullOrWhiteSpace(textBoxAsseco.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNLBKB.Text) ||
+                string.IsNullOrWhiteSpace(textBoxServer.Text) ||
+                string.IsNullOrWhiteSpace(textBoxBaza.Text) ||
                 comboBoxOdgovornoLice.SelectedIndex == -1)
             {
                 MessageBox.Show("Popunite sva obavezna polja označena zvezdicom (*)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -104,7 +110,9 @@ namespace ExcelFiller
             string idVerzija = textBoxIDVerzija.Text.Trim();
             string asseco = textBoxAsseco.Text.Trim();
             string nlbkb = textBoxNLBKB.Text.Trim();
-            string rdm = textBoxRDM.Text.Trim();
+            string server = textBoxServer.Text.Trim(); // vrednost za kolonu "Server" (F)
+            string baza = textBoxBaza.Text.Trim();
+            string spisakIdJeva = textBoxSpisakID.Text.Trim();
             string redosled = textBoxRedosled.Text.Trim();
             string napomena = textBoxNapomena.Text.Trim();
             string odgovornoLice = comboBoxOdgovornoLice.SelectedItem?.ToString() ?? "";
@@ -113,8 +121,14 @@ namespace ExcelFiller
             string datumPonovnaTest = dateTimePickerPonovnaTest.CustomFormat != " " ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
 
             // Upis u Excel fajl koristeći EPPlus
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string excelPath = System.IO.Path.Combine(desktopPath, "Izvestaj.xlsx");
+            // Upis u deljenu mrežnu lokaciju
+            string excelPath = excelSharedPath;
+            string? excelDir = System.IO.Path.GetDirectoryName(excelPath);
+            if (string.IsNullOrEmpty(excelDir) || !System.IO.Directory.Exists(excelDir))
+            {
+                MessageBox.Show("Deljena lokacija nije dostupna: \\bss-testcomp01\\PrimenaNLB", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             var fileInfo = new System.IO.FileInfo(excelPath);
             bool noviFajl = !fileInfo.Exists;
             try
@@ -132,13 +146,15 @@ namespace ExcelFiller
                         ws.Cells[1, 3].Value = "ID verzija";
                         ws.Cells[1, 4].Value = "Broj zahteva /incidenta Asseco";
                         ws.Cells[1, 5].Value = "Broj zahteva /incidenta NLBKB";
-                        ws.Cells[1, 6].Value = "RDM";
-                        ws.Cells[1, 7].Value = "Redosled puštanja";
-                        ws.Cells[1, 8].Value = "Datum prijema verzije";
-                        ws.Cells[1, 9].Value = "Datum spuštenja na test";
-                        ws.Cells[1, 10].Value = "Datum ponovne testne instalacije";
-                        ws.Cells[1, 11].Value = "BA odgovorno lice";
-                        ws.Cells[1, 12].Value = "Napomena";
+                        ws.Cells[1, 6].Value = "Server";
+                        ws.Cells[1, 7].Value = "Baza"; // NOVO
+                        ws.Cells[1, 8].Value = "Spisak ID-jeva u verziji"; // NOVO
+                        ws.Cells[1, 9].Value = "Redosled puštanja";
+                        ws.Cells[1, 10].Value = "Datum prijema verzije";
+                        ws.Cells[1, 11].Value = "Datum spuštenja na test";
+                        ws.Cells[1, 12].Value = "Datum ponovne testne instalacije";
+                        ws.Cells[1, 13].Value = "BA odgovorno lice";
+                        ws.Cells[1, 14].Value = "Napomena";
                     }
                     else
                     {
@@ -151,13 +167,15 @@ namespace ExcelFiller
                     ws.Cells[newRow, 3].Value = idVerzija;
                     ws.Cells[newRow, 4].Value = asseco;
                     ws.Cells[newRow, 5].Value = nlbkb;
-                    ws.Cells[newRow, 6].Value = string.IsNullOrEmpty(rdm) ? null : rdm;
-                    ws.Cells[newRow, 7].Value = string.IsNullOrEmpty(redosled) ? null : redosled;
-                    ws.Cells[newRow, 8].Value = datumPrijem;
-                    ws.Cells[newRow, 9].Value = datumTest;
-                    ws.Cells[newRow, 10].Value = string.IsNullOrEmpty(datumPonovnaTest) ? null : datumPonovnaTest;
-                    ws.Cells[newRow, 11].Value = odgovornoLice;
-                    ws.Cells[newRow, 12].Value = string.IsNullOrEmpty(napomena) ? null : napomena;
+                    ws.Cells[newRow, 6].Value = string.IsNullOrEmpty(server) ? null : server; // Server (F)
+                    ws.Cells[newRow, 7].Value = string.IsNullOrEmpty(baza) ? null : baza; // G
+                    ws.Cells[newRow, 8].Value = string.IsNullOrEmpty(spisakIdJeva) ? null : spisakIdJeva; // H
+                    ws.Cells[newRow, 9].Value = string.IsNullOrEmpty(redosled) ? null : redosled; // I
+                    ws.Cells[newRow, 10].Value = datumPrijem; // J
+                    ws.Cells[newRow, 11].Value = datumTest; // K
+                    ws.Cells[newRow, 12].Value = string.IsNullOrEmpty(datumPonovnaTest) ? null : datumPonovnaTest; // L
+                    ws.Cells[newRow, 13].Value = odgovornoLice; // M
+                    ws.Cells[newRow, 14].Value = string.IsNullOrEmpty(napomena) ? null : napomena; // N
                     package.Save();
                 }
                 MessageBox.Show("Podaci su uspešno upisani u Excel!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -166,7 +184,7 @@ namespace ExcelFiller
             {
                 if (ex is System.IO.IOException && ex.Message.Contains("because it is being used by another process"))
                 {
-                    MessageBox.Show("Excel fajl je otvoren. Zatvorite fajl 'Izvestaj.xlsx' na Desktopu da bi upis bio moguć.", "Excel fajl je otvoren", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Excel fajl je otvoren. Zatvorite fajl 'Izvestaj.xlsx' na deljenoj lokaciji da bi upis bio moguć.", "Excel fajl je otvoren", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {

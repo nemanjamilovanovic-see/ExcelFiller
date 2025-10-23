@@ -8,6 +8,24 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <!-- Release-specific settings to produce a single self-contained EXE -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <!-- Bundle everything into one executable -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <!-- Include .NET runtime so the target PC doesn't need .NET installed -->
+    <SelfContained>true</SelfContained>
+    <!-- Target 64-bit Windows -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- Smaller EXE via compression -->
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <!-- Embed PDB so no extra .pdb file is produced -->
+    <DebugType>embedded</DebugType>
+    <!-- Safer for WinForms apps; avoid trimming UI-related code -->
+    <PublishTrimmed>false</PublishTrimmed>
+    <!-- Ensure native libraries are bundled into the EXE and extracted at runtime -->
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="7.1.1" />
   </ItemGroup>

@@ -29,3 +29,34 @@ C:\Users\nemanja.milovanovic\source\repos\ExcelFiller\obj\Release\net8.0-windows
 C:\Users\nemanja.milovanovic\source\repos\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.pdb
 C:\Users\nemanja.milovanovic\source\repos\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.genruntimeconfig.cache
 C:\Users\nemanja.milovanovic\source\repos\ExcelFiller\obj\Release\net8.0-windows\ref\ExcelFiller.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\ExcelFiller.exe
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\ExcelFiller.deps.json
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\ExcelFiller.runtimeconfig.json
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\ExcelFiller.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\ExcelFiller.pdb
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\EPPlus.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\EPPlus.Interfaces.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\EPPlus.System.Drawing.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.Configuration.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.Extensions.Primitives.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\bin\Release\net8.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.csproj.AssemblyReference.cache
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.Form1.resources
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.csproj.GenerateResource.cache
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.AssemblyInfoInputs.cache
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.AssemblyInfo.cs
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.csproj.CoreCompileInputs.cache
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.sourcelink.json
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFil.D86E3617.Up2Date
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\refint\ExcelFiller.dll
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.pdb
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ExcelFiller.genruntimeconfig.cache
+C:\Users\nemanja.milovanovic\Desktop\New folder (21)\ExcelFiller\obj\Release\net8.0-windows\ref\ExcelFiller.dll
