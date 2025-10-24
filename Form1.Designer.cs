@@ -320,7 +320,7 @@
             labelPonovnaTest.Name = "labelPonovnaTest";
             labelPonovnaTest.Size = new Size(240, 25);
             labelPonovnaTest.TabIndex = 18;
-            labelPonovnaTest.Text = "Datum pon. testne instalacije";
+            labelPonovnaTest.Text = "Datum produkcione instalacije";
             // 
             // labelServer
             // 

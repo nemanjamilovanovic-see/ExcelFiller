@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj": {}
+    "C:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj": {}
   },
   "projects": {
-    "c:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj": {
+    "C:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj",
+        "projectUniqueName": "C:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj",
         "projectName": "ExcelFiller",
-        "projectPath": "c:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj",
+        "projectPath": "C:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\ExcelFiller.csproj",
         "packagesPath": "C:\\Users\\nemanja.milovanovic\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\obj\\",
+        "outputPath": "C:\\Users\\nemanja.milovanovic\\Desktop\\New folder (21)\\ExcelFiller\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,7 +59,7 @@
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.20, )",
+              "version": "[8.0.21, )",
               "autoReferenced": true
             }
           },
@@ -77,15 +77,15 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
-              "version": "[8.0.20, 8.0.20]"
+              "version": "[8.0.21, 8.0.21]"
             },
             {
               "name": "Microsoft.NETCore.App.Runtime.win-x64",
-              "version": "[8.0.20, 8.0.20]"
+              "version": "[8.0.21, 8.0.21]"
             },
             {
               "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
-              "version": "[8.0.20, 8.0.20]"
+              "version": "[8.0.21, 8.0.21]"
             }
           ],
           "frameworkReferences": {
@@ -96,7 +96,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

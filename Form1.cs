@@ -57,19 +57,19 @@ namespace ExcelFiller
                     string poslednjaVerzija = "Nema podataka za izabrani modul.";
                     for (int i = 2; i <= rowCount; i++)
                     {
-                        string modulCell = ws.Cells[i, 2].Text.Trim();
-                        string idVerzijaCell = ws.Cells[i, 3].Text.Trim();
-                        // Datumi su pomereni na kolone K (11) i L (12)
-                        string datumTestCell = ws.Cells[i, 11].Text.Trim();
-                        string datumPonTestCell = ws.Cells[i, 12].Text.Trim();
-                        DateTime datumTest, datumPonTest;
+                        // Nova šema: C/D/E su datumi, ostalo pomereno udesno.
+                        string modulCell = ws.Cells[i, 1].Text.Trim(); // A
+                        string idVerzijaCell = ws.Cells[i, 2].Text.Trim(); // B
+                        string datumTestCell = ws.Cells[i, 4].Text.Trim(); // D: Datum testiranja
+                        string datumProdukcioneCell = ws.Cells[i, 5].Text.Trim(); // E: Datum produkcione
+                        DateTime datumTest, datumProdukcione;
                         DateTime? maxDatum = null;
                         if (modulCell == excelNazivModula)
                         {
                             if (DateTime.TryParseExact(datumTestCell, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out datumTest))
                                 maxDatum = datumTest;
-                            if (DateTime.TryParseExact(datumPonTestCell, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out datumPonTest))
-                                if (!maxDatum.HasValue || datumPonTest > maxDatum) maxDatum = datumPonTest;
+                            if (DateTime.TryParseExact(datumProdukcioneCell, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out datumProdukcione))
+                                if (!maxDatum.HasValue || datumProdukcione > maxDatum) maxDatum = datumProdukcione;
                             if (maxDatum.HasValue && (!poslednjiDatum.HasValue || maxDatum > poslednjiDatum))
                             {
                                 poslednjiDatum = maxDatum;
@@ -118,7 +118,7 @@ namespace ExcelFiller
             string odgovornoLice = comboBoxOdgovornoLice.SelectedItem?.ToString() ?? "";
             string datumPrijem = dateTimePickerPrijem.Value.ToString("dd.MM.yyyy");
             string datumTest = dateTimePickerTest.Value.ToString("dd.MM.yyyy");
-            string datumPonovnaTest = dateTimePickerPonovnaTest.CustomFormat != " " ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
+            string datumProdukcione = dateTimePickerPonovnaTest.CustomFormat != " " ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
 
             // Upis u Excel fajl koristeći EPPlus
             // Upis u deljenu mrežnu lokaciju
@@ -140,21 +140,20 @@ namespace ExcelFiller
                     if (noviFajl)
                     {
                         ws = package.Workbook.Worksheets.Add("Podaci");
-                        // Zaglavlja
-                        ws.Cells[1, 1].Value = "RB";
-                        ws.Cells[1, 2].Value = "Modul (aplikacija)";
-                        ws.Cells[1, 3].Value = "ID verzija";
-                        ws.Cells[1, 4].Value = "Broj zahteva /incidenta Asseco";
-                        ws.Cells[1, 5].Value = "Broj zahteva /incidenta NLBKB";
-                        ws.Cells[1, 6].Value = "Server";
-                        ws.Cells[1, 7].Value = "Baza"; // NOVO
-                        ws.Cells[1, 8].Value = "Spisak ID-jeva u verziji"; // NOVO
-                        ws.Cells[1, 9].Value = "Redosled puštanja";
-                        ws.Cells[1, 10].Value = "Datum prijema verzije";
-                        ws.Cells[1, 11].Value = "Datum spuštenja na test";
-                        ws.Cells[1, 12].Value = "Datum ponovne testne instalacije";
-                        ws.Cells[1, 13].Value = "BA odgovorno lice";
-                        ws.Cells[1, 14].Value = "Napomena";
+                        // Nova šema bez RB i sa datumima u C/D/E
+                        ws.Cells[1, 1].Value = "Modul (aplikacija)";                 // A
+                        ws.Cells[1, 2].Value = "ID verzija";                         // B
+                        ws.Cells[1, 3].Value = "Datum prijema verzije";              // C
+                        ws.Cells[1, 4].Value = "Datum spuštenja na test";            // D
+                        ws.Cells[1, 5].Value = "Datum produkcione instalacije";   // E
+                        ws.Cells[1, 6].Value = "Broj zahteva /incidenta Asseco";     // F
+                        ws.Cells[1, 7].Value = "Broj zahteva /incidenta NLBKB";      // G
+                        ws.Cells[1, 8].Value = "Server";                             // H
+                        ws.Cells[1, 9].Value = "Baza";                               // I
+                        ws.Cells[1, 10].Value = "Spisak ID-jeva u verziji";          // J
+                        ws.Cells[1, 11].Value = "Redosled puštanja";                 // K
+                        ws.Cells[1, 12].Value = "BA odgovorno lice";                 // L
+                        ws.Cells[1, 13].Value = "Napomena";                          // M
                     }
                     else
                     {
@@ -162,34 +161,26 @@ namespace ExcelFiller
                     }
                     int lastRow = ws.Dimension?.End.Row ?? 1;
                     int newRow = lastRow + 1;
-                    ws.Cells[newRow, 1].Value = newRow - 1; // RB
-                    ws.Cells[newRow, 2].Value = modul;
-                    ws.Cells[newRow, 3].Value = idVerzija;
-                    ws.Cells[newRow, 4].Value = asseco;
-                    ws.Cells[newRow, 5].Value = nlbkb;
-                    ws.Cells[newRow, 6].Value = string.IsNullOrEmpty(server) ? null : server; // Server (F)
-                    ws.Cells[newRow, 7].Value = string.IsNullOrEmpty(baza) ? null : baza; // G
-                    ws.Cells[newRow, 8].Value = string.IsNullOrEmpty(spisakIdJeva) ? null : spisakIdJeva; // H
-                    ws.Cells[newRow, 9].Value = string.IsNullOrEmpty(redosled) ? null : redosled; // I
-                    ws.Cells[newRow, 10].Value = datumPrijem; // J
-                    ws.Cells[newRow, 11].Value = datumTest; // K
-                    ws.Cells[newRow, 12].Value = string.IsNullOrEmpty(datumPonovnaTest) ? null : datumPonovnaTest; // L
-                    ws.Cells[newRow, 13].Value = odgovornoLice; // M
-                    ws.Cells[newRow, 14].Value = string.IsNullOrEmpty(napomena) ? null : napomena; // N
+                    ws.Cells[newRow, 1].Value = modul; // A
+                    ws.Cells[newRow, 2].Value = idVerzija; // B
+                    ws.Cells[newRow, 3].Value = datumPrijem; // C
+                    ws.Cells[newRow, 4].Value = datumTest; // D
+                    ws.Cells[newRow, 5].Value = string.IsNullOrEmpty(datumProdukcione) ? null : datumProdukcione; // E
+                    ws.Cells[newRow, 6].Value = asseco; // F
+                    ws.Cells[newRow, 7].Value = nlbkb; // G
+                    ws.Cells[newRow, 8].Value = string.IsNullOrEmpty(server) ? null : server; // H
+                    ws.Cells[newRow, 9].Value = string.IsNullOrEmpty(baza) ? null : baza; // I
+                    ws.Cells[newRow, 10].Value = string.IsNullOrEmpty(spisakIdJeva) ? null : spisakIdJeva; // J
+                    ws.Cells[newRow, 11].Value = string.IsNullOrEmpty(redosled) ? null : redosled; // K
+                    ws.Cells[newRow, 12].Value = odgovornoLice; // L
+                    ws.Cells[newRow, 13].Value = string.IsNullOrEmpty(napomena) ? null : napomena; // M
                     package.Save();
                 }
                 MessageBox.Show("Podaci su uspešno upisani u Excel!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                if (ex is System.IO.IOException && ex.Message.Contains("because it is being used by another process"))
-                {
-                    MessageBox.Show("Excel fajl je otvoren. Zatvorite fajl 'Izvestaj.xlsx' na deljenoj lokaciji da bi upis bio moguć.", "Excel fajl je otvoren", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show($"Greška pri upisu u Excel: {ex.Message}", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Excel fajl nije moguće upisati. Najčešći razlog je da je fajl otvoren na drugom računaru ili programu, ili nemate dozvolu za upis. Zatvorite fajl 'Izvestaj.xlsx' na deljenoj lokaciji i pokušajte ponovo.", "Upozorenje: Excel fajl nije dostupan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

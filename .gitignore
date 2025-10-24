@@ -1,4 +1,3 @@
-
 # Additional ignores (Visual Studio / .NET)
 .vscode/
 packages/
@@ -57,3 +56,13 @@ Thumbs.db
 # Build folders
 Debug/
 Release/
+
+# Excel/Office
+~$*.xlsx
+*.xlsb
+*.xlsm
+*.xls
+
+# Publish output
+ExcelFillerBuild/
+*.publish/
