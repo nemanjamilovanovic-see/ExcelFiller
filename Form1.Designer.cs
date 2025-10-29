@@ -198,12 +198,13 @@
             // labelSpisakID
             //
             labelSpisakID.AutoSize = true;
+            labelSpisakID.ForeColor = Color.Red;
             labelSpisakID.Font = new Font("Segoe UI", 9F);
             labelSpisakID.Location = new Point(30, 390);
             labelSpisakID.Name = "labelSpisakID";
             labelSpisakID.Size = new Size(197, 25);
             labelSpisakID.TabIndex = 20;
-            labelSpisakID.Text = "Spisak ID-jeva u verziji";
+            labelSpisakID.Text = "Broj zahteva u CA alatu*";
 
             // textBoxSpisakID
             //
