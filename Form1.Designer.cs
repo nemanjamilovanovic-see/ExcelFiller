@@ -181,12 +181,11 @@
             //
             labelBaza.AutoSize = true;
             labelBaza.Font = new Font("Segoe UI", 9F);
-            labelBaza.ForeColor = Color.Red;
             labelBaza.Location = new Point(30, 350);
             labelBaza.Name = "labelBaza";
             labelBaza.Size = new Size(66, 25);
             labelBaza.TabIndex = 19;
-            labelBaza.Text = "Baza*";
+            labelBaza.Text = "Baza";
 
             // textBoxBaza
             //

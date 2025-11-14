@@ -454,7 +454,6 @@ namespace ExcelFiller
                 string.IsNullOrWhiteSpace(textBoxAsseco.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNLBKB.Text) ||
                 string.IsNullOrWhiteSpace(textBoxServer.Text) ||
-                string.IsNullOrWhiteSpace(textBoxBaza.Text) ||
                 comboBoxOdgovornoLice.SelectedIndex == -1)
             {
                 MessageBox.Show("Popunite sva obavezna polja označena zvezdicom (*)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);

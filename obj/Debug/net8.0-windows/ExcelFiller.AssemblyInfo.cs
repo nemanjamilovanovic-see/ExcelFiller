@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ExcelFiller")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+935d4656dd856135603315ec47759e078e16b603")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5250866979a79dec0c30f949950cc60c5eebbe50")]
 [assembly: System.Reflection.AssemblyProductAttribute("ExcelFiller")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ExcelFiller")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
