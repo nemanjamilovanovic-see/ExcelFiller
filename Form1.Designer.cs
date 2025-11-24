@@ -45,6 +45,8 @@
             textBoxRedosled = new TextBox();
             comboBoxOdgovornoLice = new ComboBox();
             textBoxNapomena = new TextBox();
+            labelPutanjaIsporuke = new Label();
+            textBoxPutanjaIsporuke = new TextBox();
             buttonDodaj = new Button();
             labelModul = new Label();
             labelIDVerzija = new Label();
@@ -73,7 +75,7 @@
             tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(588, 680);
+            tabControl.Size = new Size(588, 720);
             tabControl.TabIndex = 100;
             // 
             // tabPageUnos
@@ -89,6 +91,8 @@
             tabPageUnos.Controls.Add(textBoxRedosled);
             tabPageUnos.Controls.Add(comboBoxOdgovornoLice);
             tabPageUnos.Controls.Add(textBoxNapomena);
+            tabPageUnos.Controls.Add(labelPutanjaIsporuke);
+            tabPageUnos.Controls.Add(textBoxPutanjaIsporuke);
             tabPageUnos.Controls.Add(buttonDodaj);
             tabPageUnos.Controls.Add(labelModul);
             tabPageUnos.Controls.Add(labelIDVerzija);
@@ -107,7 +111,7 @@
             tabPageUnos.Controls.Add(labelNapomena);
             tabPageUnos.Location = new Point(4, 34);
             tabPageUnos.Name = "tabPageUnos";
-            tabPageUnos.Size = new Size(580, 642);
+            tabPageUnos.Size = new Size(580, 682);
             tabPageUnos.TabIndex = 0;
             tabPageUnos.Text = "Unos";
             tabPageUnos.UseVisualStyleBackColor = true;
@@ -235,14 +239,33 @@
             textBoxNapomena.Name = "textBoxNapomena";
             textBoxNapomena.Size = new Size(250, 31);
             textBoxNapomena.TabIndex = 12;
+
+            // labelPutanjaIsporuke
+            //
+            labelPutanjaIsporuke.AutoSize = true;
+            labelPutanjaIsporuke.ForeColor = Color.Red;
+            labelPutanjaIsporuke.Font = new Font("Segoe UI", 9F);
+            labelPutanjaIsporuke.Location = new Point(30, 545);
+            labelPutanjaIsporuke.Name = "labelPutanjaIsporuke";
+            labelPutanjaIsporuke.Size = new Size(153, 25);
+            labelPutanjaIsporuke.TabIndex = 27;
+            labelPutanjaIsporuke.Text = "Putanja isporuke*";
+
+            // textBoxPutanjaIsporuke
+            //
+            textBoxPutanjaIsporuke.Location = new Point(300, 545);
+            textBoxPutanjaIsporuke.Name = "textBoxPutanjaIsporuke";
+            textBoxPutanjaIsporuke.Size = new Size(250, 31);
+            textBoxPutanjaIsporuke.TabIndex = 13;
             // 
             // buttonDodaj
             // 
-            buttonDodaj.Location = new Point(300, 555);
+            buttonDodaj.Location = new Point(300, 605);
             buttonDodaj.Name = "buttonDodaj";
             buttonDodaj.Size = new Size(250, 40);
-            buttonDodaj.TabIndex = 13;
+            buttonDodaj.TabIndex = 14;
             buttonDodaj.Text = "Dodaj u Excel";
+            buttonDodaj.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             buttonDodaj.UseVisualStyleBackColor = true;
             buttonDodaj.Click += buttonDodaj_Click;
             // 
@@ -371,7 +394,7 @@
             tabPagePretraga.Controls.Add(labelRezultat);
             tabPagePretraga.Location = new Point(4, 34);
             tabPagePretraga.Name = "tabPagePretraga";
-            tabPagePretraga.Size = new Size(580, 642);
+            tabPagePretraga.Size = new Size(580, 682);
             tabPagePretraga.TabIndex = 1;
             tabPagePretraga.Text = "Pretraga";
             tabPagePretraga.UseVisualStyleBackColor = true;
@@ -406,7 +429,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(588, 680);
+            ClientSize = new Size(588, 720);
             Controls.Add(tabControl);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
@@ -443,6 +466,8 @@
         private System.Windows.Forms.TextBox textBoxRedosled;
         private System.Windows.Forms.ComboBox comboBoxOdgovornoLice;
         private System.Windows.Forms.TextBox textBoxNapomena;
+        private System.Windows.Forms.Label labelPutanjaIsporuke;
+        private System.Windows.Forms.TextBox textBoxPutanjaIsporuke;
         private System.Windows.Forms.Button buttonDodaj;
         private System.Windows.Forms.Label labelModul;
         private System.Windows.Forms.Label labelIDVerzija;

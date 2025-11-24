@@ -454,6 +454,7 @@ namespace ExcelFiller
                 string.IsNullOrWhiteSpace(textBoxAsseco.Text) ||
                 string.IsNullOrWhiteSpace(textBoxNLBKB.Text) ||
                 string.IsNullOrWhiteSpace(textBoxServer.Text) ||
+                string.IsNullOrWhiteSpace(textBoxPutanjaIsporuke.Text) ||
                 comboBoxOdgovornoLice.SelectedIndex == -1)
             {
                 MessageBox.Show("Popunite sva obavezna polja označena zvezdicom (*)!", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -473,6 +474,7 @@ namespace ExcelFiller
             string spisakIdJeva = textBoxSpisakID.Text.Trim();
             string redosled = textBoxRedosled.Text.Trim();
             string napomena = textBoxNapomena.Text.Trim();
+            string putanjaIsporuke = textBoxPutanjaIsporuke.Text.Trim();
             string odgovornoLice = comboBoxOdgovornoLice.SelectedItem?.ToString() ?? "";
             string datumPrijem = dateTimePickerPrijem.Value.ToString("dd.MM.yyyy");
             string datumTest = dateTimePickerTest.Value.ToString("dd.MM.yyyy");
@@ -510,6 +512,7 @@ namespace ExcelFiller
                         ws.Cells[1, 11].Value = "Redosled puštanja";                 // K
                         ws.Cells[1, 12].Value = "BA odgovorno lice";                 // L
                         ws.Cells[1, 13].Value = "Napomena";                          // M
+                        ws.Cells[1, 14].Value = "Putanja isporuke";                  // N
                     }
                     else
                     {
@@ -530,6 +533,7 @@ namespace ExcelFiller
                     ws.Cells[newRow, 11].Value = string.IsNullOrEmpty(redosled) ? null : redosled; // K
                     ws.Cells[newRow, 12].Value = odgovornoLice; // L
                     ws.Cells[newRow, 13].Value = string.IsNullOrEmpty(napomena) ? null : napomena; // M
+                    ws.Cells[newRow, 14].Value = string.IsNullOrEmpty(putanjaIsporuke) ? null : putanjaIsporuke; // N
                     package.Save();
                 }
                 MessageBox.Show("Podaci su uspešno upisani u Excel!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
