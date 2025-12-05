@@ -12,6 +12,9 @@ namespace ExcelFiller
         // Shared Excel file path on network
         private readonly string excelSharedPath = @"\\bss-testcomp01\PrimenaNLB\Izvestaj.xlsx";
 
+        // Excel writer helper
+        private readonly ExcelWriter excelWriter = new ExcelWriter();
+
         // Custom dropdown menus for Server and Baza
         private ContextMenuStrip? menuServers;
         private ContextMenuStrip? menuBaze;
@@ -51,6 +54,19 @@ namespace ExcelFiller
             };
 
             buttonPretrazi.Click += buttonPretrazi_Click;
+
+            // Validation UI: disable Dodaj dok obavezna polja nisu popunjena
+            buttonDodaj.Enabled = false;
+            comboBoxModul.SelectedIndexChanged += (s, e) => UpdateDodajEnabled();
+            textBoxIDVerzija.TextChanged += (s, e) => UpdateDodajEnabled();
+            textBoxAsseco.TextChanged += (s, e) => UpdateDodajEnabled();
+            textBoxNLBKB.TextChanged += (s, e) => UpdateDodajEnabled();
+            dateTimePickerPrijem.ValueChanged += (s, e) => UpdateDodajEnabled();
+            dateTimePickerTest.ValueChanged += (s, e) => UpdateDodajEnabled();
+            textBoxServer.TextChanged += (s, e) => UpdateDodajEnabled();
+            textBoxSpisakID.TextChanged += (s, e) => UpdateDodajEnabled();
+            comboBoxOdgovornoLice.SelectedIndexChanged += (s, e) => UpdateDodajEnabled();
+            textBoxPutanjaIsporuke.TextChanged += (s, e) => UpdateDodajEnabled();
 
             // Auto-fill NLBKB when Asseco changes
             textBoxAsseco.Leave += async (s, e) =>
@@ -124,6 +140,21 @@ namespace ExcelFiller
             {
                 // If controls not yet created, skip without crashing
             }
+        }
+
+        private void UpdateDodajEnabled()
+        {
+            bool sviPopunjeni =
+                comboBoxModul.SelectedIndex != -1 &&
+                !string.IsNullOrWhiteSpace(textBoxIDVerzija.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxAsseco.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxNLBKB.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxServer.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxSpisakID.Text) &&
+                !string.IsNullOrWhiteSpace(textBoxPutanjaIsporuke.Text) &&
+                comboBoxOdgovornoLice.SelectedIndex != -1;
+
+            buttonDodaj.Enabled = sviPopunjeni;
         }
 
         private Button CreateArrowButton()
@@ -394,14 +425,10 @@ namespace ExcelFiller
             string izabraniModul = comboBoxPretragaModul.SelectedItem?.ToString() ?? "";
             if (string.IsNullOrWhiteSpace(izabraniModul))
             {
-                labelRezultat.Text = "Izaberite modul ili podmodul!";
+                labelRezultat.Text = "Izaberite modul!";
                 return;
             }
             string excelNazivModula = izabraniModul;
-            if (izabraniModul.StartsWith("  - "))
-            {
-                excelNazivModula = "iBank (inHouse, web) - " + izabraniModul.Trim().Substring(3);
-            }
             string excelPath = excelSharedPath;
             if (!System.IO.File.Exists(excelPath))
             {
@@ -462,10 +489,6 @@ namespace ExcelFiller
             }
 
             string modul = comboBoxModul.SelectedItem?.ToString() ?? "";
-            if (modul.StartsWith("  - "))
-            {
-                modul = "iBank (inHouse, web) - " + modul.Trim().Substring(3);
-            }
             string idVerzija = textBoxIDVerzija.Text.Trim();
             string asseco = textBoxAsseco.Text.Trim();
             string nlbkb = textBoxNLBKB.Text.Trim();
@@ -480,62 +503,56 @@ namespace ExcelFiller
             string datumTest = dateTimePickerTest.Value.ToString("dd.MM.yyyy");
             string datumProdukcione = dateTimePickerPonovnaTest.CustomFormat != " " ? dateTimePickerPonovnaTest.Value.ToString("dd.MM.yyyy") : "";
 
-            string excelPath = excelSharedPath;
-            string? excelDir = System.IO.Path.GetDirectoryName(excelPath);
-            if (string.IsNullOrEmpty(excelDir) || !System.IO.Directory.Exists(excelDir))
-            {
-                MessageBox.Show("Deljena lokacija nije dostupna: \\bss-testcomp01\\PrimenaNLB", "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            var fileInfo = new System.IO.FileInfo(excelPath);
-            bool noviFajl = !fileInfo.Exists;
             try
             {
-                OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
-                using (var package = new OfficeOpenXml.ExcelPackage(fileInfo))
+                // Glavni Excel
+                excelWriter.AppendRow(
+                    excelSharedPath,
+                    modul,
+                    idVerzija,
+                    datumPrijem,
+                    datumTest,
+                    datumProdukcione,
+                    asseco,
+                    nlbkb,
+                    server,
+                    baza,
+                    spisakIdJeva,
+                    redosled,
+                    odgovornoLice,
+                    napomena,
+                    putanjaIsporuke);
+
+                // Upis u dodatni Excel fajl po modulu (ako je definisan)
+                try
                 {
-                    OfficeOpenXml.ExcelWorksheet ws;
-                    if (noviFajl)
+                    string? secondaryPath = GetSecondaryExcelPathForModule(modul);
+                    if (!string.IsNullOrWhiteSpace(secondaryPath))
                     {
-                        ws = package.Workbook.Worksheets.Add("Podaci");
-                        // New schema without RB and with dates in C/D/E
-                        ws.Cells[1, 1].Value = "Modul (aplikacija)";                 // A
-                        ws.Cells[1, 2].Value = "ID verzija";                         // B
-                        ws.Cells[1, 3].Value = "Datum prijema verzije";              // C
-                        ws.Cells[1, 4].Value = "Datum spuštenja na test";            // D
-                        ws.Cells[1, 5].Value = "Datum produkcione instalacije";      // E
-                        ws.Cells[1, 6].Value = "Broj zahteva /incidenta Asseco";     // F
-                        ws.Cells[1, 7].Value = "Broj zahteva /incidenta NLBKB";      // G
-                        ws.Cells[1, 8].Value = "Server";                             // H
-                        ws.Cells[1, 9].Value = "Baza";                               // I
-                        ws.Cells[1, 10].Value = "Spisak ID-jeva u verziji";          // J
-                        ws.Cells[1, 11].Value = "Redosled puštanja";                 // K
-                        ws.Cells[1, 12].Value = "BA odgovorno lice";                 // L
-                        ws.Cells[1, 13].Value = "Napomena";                          // M
-                        ws.Cells[1, 14].Value = "Putanja isporuke";                  // N
+                        excelWriter.AppendRow(
+                            secondaryPath,
+                            modul,
+                            idVerzija,
+                            datumPrijem,
+                            datumTest,
+                            datumProdukcione,
+                            asseco,
+                            nlbkb,
+                            server,
+                            baza,
+                            spisakIdJeva,
+                            redosled,
+                            odgovornoLice,
+                            napomena,
+                            putanjaIsporuke);
                     }
-                    else
-                    {
-                        ws = package.Workbook.Worksheets[0];
-                    }
-                    int lastRow = ws.Dimension?.End.Row ?? 1;
-                    int newRow = lastRow + 1;
-                    ws.Cells[newRow, 1].Value = modul; // A
-                    ws.Cells[newRow, 2].Value = idVerzija; // B
-                    ws.Cells[newRow, 3].Value = datumPrijem; // C
-                    ws.Cells[newRow, 4].Value = datumTest; // D
-                    ws.Cells[newRow, 5].Value = string.IsNullOrEmpty(datumProdukcione) ? null : datumProdukcione; // E
-                    ws.Cells[newRow, 6].Value = asseco; // F
-                    ws.Cells[newRow, 7].Value = nlbkb; // G
-                    ws.Cells[newRow, 8].Value = string.IsNullOrEmpty(server) ? null : server; // H
-                    ws.Cells[newRow, 9].Value = string.IsNullOrEmpty(baza) ? null : baza; // I
-                    ws.Cells[newRow, 10].Value = string.IsNullOrEmpty(spisakIdJeva) ? null : spisakIdJeva; // J
-                    ws.Cells[newRow, 11].Value = string.IsNullOrEmpty(redosled) ? null : redosled; // K
-                    ws.Cells[newRow, 12].Value = odgovornoLice; // L
-                    ws.Cells[newRow, 13].Value = string.IsNullOrEmpty(napomena) ? null : napomena; // M
-                    ws.Cells[newRow, 14].Value = string.IsNullOrEmpty(putanjaIsporuke) ? null : putanjaIsporuke; // N
-                    package.Save();
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Podaci su upisani u glavni Excel, ali nije uspelo upisivanje u dodatni Excel fajl: {ex.Message}",
+                        "Upozorenje", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
                 MessageBox.Show("Podaci su uspešno upisani u Excel!", "Uspeh", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception)
@@ -543,5 +560,46 @@ namespace ExcelFiller
                 MessageBox.Show("Excel fajl nije moguće upisati. Najčešći razlog je da je fajl otvoren na drugom računaru ili programu, ili nemate dozvolu za upis. Zatvorite fajl 'Izvestaj.xlsx' na deljenoj lokaciji i pokušajte ponovo.", "Upozorenje: Excel fajl nije dostupan", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private static string? GetSecondaryExcelPathForModule(string modul)
+        {
+            modul = modul.Trim();
+
+            // PD -> PD.xlsx u Nikola
+            if (string.Equals(modul, "PD", StringComparison.OrdinalIgnoreCase))
+            {
+                return @"\\bss-testcomp01\PrimenaNLB\Nikola\PD.xlsx";
+            }
+
+            // Luka folder
+            string[] lukaModules =
+            {
+                "CS",
+                "iBank",
+                "KDP",
+                "PGW"
+            };
+            if (lukaModules.Contains(modul, StringComparer.OrdinalIgnoreCase))
+            {
+                return $@"\\bss-testcomp01\PrimenaNLB\Luka\{modul}.xlsx";
+            }
+
+            // Nemanja folder
+            string[] nemanjaModules = { "DevPP", "GK", "Trezor" };
+            if (nemanjaModules.Contains(modul, StringComparer.OrdinalIgnoreCase))
+            {
+                return $@"\\bss-testcomp01\PrimenaNLB\Nemanja\{modul}.xlsx";
+            }
+
+            // Milica folder
+            string[] milicaModules = { "BankaP", "RiskManag", "CMS", "PP", "BCAPI" };
+            if (milicaModules.Contains(modul, StringComparer.OrdinalIgnoreCase))
+            {
+                return $@"\\bss-testcomp01\PrimenaNLB\Milica\{modul}.xlsx";
+            }
+
+            return null;
+        }
+
     }
 }

@@ -120,7 +120,7 @@
             // 
             comboBoxModul.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxModul.FormattingEnabled = true;
-            comboBoxModul.Items.AddRange(new object[] { "GK", "KDP", "DevPP", "CMS", "Trezor", "DinPP", "CS", "PD", "PP", "RiskManag", "iBank (inHouse, web)", "  - iBank - DB isporuke", "  - AdapterPlugInCMS", "  - AdapterPlugInRT", "  - CMSAdapter", "  - DEAuthenticRs", "  - DEWebAdminP", "  - DEWebApiP", "  - DEWebRemote", "  - DigitalBranchAPI", "  - EmailService", "  - FPSAdapter", "  - FxWeb2012Kombank", "  - HalcomNotifProxy", "  - KCIntegrationSvc", "  - PaymAdapt", "  - RemoteSigningManSrv", "  - SysIntAPI", "  - SysIntegrationAPI", "  - SysIntLib", "  - SysIntLib-KoBBg", "  - SysIntLibV2KBBG", "  - SysIntServiceKBBGse", "  - SysMngrKBBG-iBank", "  - SysMngrWSKBBG-iBank", "  - SysMngrWS-KOBBg", "  - SysMngrWSProxyKBBG", "  - SystemManagerWS", "  - SystemManagerWSProxy", "  - TanGeneratorKOBBG", "PGW", "BankaP", "BCAPI", "FGW" });
+            comboBoxModul.Items.AddRange(new object[] { "GK", "KDP", "DevPP", "CMS", "Trezor", "CS", "PD", "PP", "RiskManag", "iBank", "PGW", "BankaP", "BCAPI", "FGW" });
             comboBoxModul.Location = new Point(300, 25);
             comboBoxModul.Name = "comboBoxModul";
             comboBoxModul.Size = new Size(250, 33);
@@ -403,7 +403,7 @@
             // 
             comboBoxPretragaModul.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPretragaModul.FormattingEnabled = true;
-            comboBoxPretragaModul.Items.AddRange(new object[] { "GK", "KDP", "DevPP", "CMS", "Trezor", "DinPP", "CS", "PD", "PP", "RiskManag", "iBank (inHouse, web)", "  - iBank - DB isporuke", "  - AdapterPlugInCMS", "  - AdapterPlugInRT", "  - CMSAdapter", "  - DEAuthenticRs", "  - DEWebAdminP", "  - DEWebApiP", "  - DEWebRemote", "  - DigitalBranchAPI", "  - EmailService", "  - FPSAdapter", "  - FxWeb2012Kombank", "  - HalcomNotifProxy", "  - KCIntegrationSvc", "  - PaymAdapt", "  - RemoteSigningManSrv", "  - SysIntAPI", "  - SysIntegrationAPI", "  - SysIntLib", "  - SysIntLib-KoBBg", "  - SysIntLibV2KBBG", "  - SysIntServiceKBBGse", "  - SysMngrKBBG-iBank", "  - SysMngrWSKBBG-iBank", "  - SysMngrWS-KOBBg", "  - SysMngrWSProxyKBBG", "  - SystemManagerWS", "  - SystemManagerWSProxy", "  - TanGeneratorKOBBG", "PGW", "BankaP", "BCAPI", "FGW" });
+            comboBoxPretragaModul.Items.AddRange(new object[] { "GK", "KDP", "DevPP", "CMS", "Trezor", "CS", "PD", "PP", "RiskManag", "iBank", "PGW", "BankaP", "BCAPI", "FGW" });
             comboBoxPretragaModul.Location = new Point(40, 40);
             comboBoxPretragaModul.Name = "comboBoxPretragaModul";
             comboBoxPretragaModul.Size = new Size(300, 33);
